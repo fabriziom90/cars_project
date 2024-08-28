@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\OptionalController as OptionalController;
 use App\Http\Controllers\Admin\CarController as CarController;
 use App\Http\Controllers\Admin\BrandController as BrandController;
 
+use App\Http\Controllers\Guest\CarController as GuestCarController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,6 +27,8 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/cars', [GuestCarController::class, 'index'])->name('guest_cars');
 
 Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(function(){
     Route::resource('optionals', OptionalController::class);
