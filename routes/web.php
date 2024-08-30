@@ -24,9 +24,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::get('/cars', [GuestCarController::class, 'index'])->name('guest_cars');
 
@@ -34,6 +32,10 @@ Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(
     Route::resource('optionals', OptionalController::class);
     Route::resource('brands', BrandController::class);
     Route::resource('cars', CarController::class);
+
+    Route::get('/', function () {
+        return view('dashboard');
+    })->middleware(['auth', 'verified'])->name('dashboard');
 });
 
 Route::middleware('auth')->group(function () {
