@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Support\Str;
+
 class Car extends Model
 {
     use HasFactory;
@@ -17,5 +19,9 @@ class Car extends Model
 
     public function optionals(){
         return $this->belongsToMany(Optional::class);
+    }
+
+    public function generateSlug($name){
+        return Str::slug($name, '-');
     }
 }
